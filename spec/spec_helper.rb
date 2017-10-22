@@ -7,6 +7,8 @@ require 'vcr'
 require 'webmock'
 include WebMock::API
 WebMock.enable!
+require 'simplecov'
+SimpleCov.start
 
 require_relative '../lib/wiki_api.rb'
 
