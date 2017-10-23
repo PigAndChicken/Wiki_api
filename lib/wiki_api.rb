@@ -1,6 +1,5 @@
 require 'http'
 require 'addressable'
- # get addressable/uri to encode uri
 require_relative 'article.rb'
 
 module WikiArticle
