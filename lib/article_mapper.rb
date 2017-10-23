@@ -1,0 +1,2 @@
+module WikiArticle
+  module Wiki
