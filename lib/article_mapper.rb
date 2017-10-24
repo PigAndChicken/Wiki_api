@@ -1,12 +1,12 @@
 module WikiArticle
   module Wikipedia
     # Data mapper's entity object for Wikipedia's article
-    class WikiMapper
+    class ArticleMapper
       # initialize with gateway object
       def initialize(gateway)
         @gateway = gateway
       end
-      
+
       # load data from gateway object
       def load(title)
         article_info = @gateway.article_info(title)
@@ -15,14 +15,13 @@ module WikiArticle
 
       # build entity object with loaded data structure
       def build_entity(article_info)
-        DataMapper.new(article_info, gateway).build_entity
+        DataMapper.new(article_info).build_entity
       end
-      
+
       # map/parse Wiki's data schema to domain entity's data schema
       class DataMapper
-        def initialize(article_info, gateway)
+        def initialize(article_info)
           @article_info = article_info
-          @article_mapper = ArticleMapper.new(gateway)
           @pageid = @article_info['query']['pages'].keys[0]
         end
 
