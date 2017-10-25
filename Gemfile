@@ -10,3 +10,6 @@ gem 'vcr'
 gem 'simplecov'
 gem 'reek'
 gem 'rake'
+
+gem 'dry-struct'
+gem 'dry-types'
