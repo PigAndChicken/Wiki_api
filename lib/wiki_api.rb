@@ -1,6 +1,5 @@
 require 'http'
 require 'addressable'
-require_relative 'article.rb'
 
 module WikiArticle
   module Wikipedia
@@ -13,6 +12,7 @@ module WikiArticle
         NotFound = Class.new(StandardError)
       end
 
+      # Encapsulates API response success and errors
       class Response
         HTTP_ERROR = {
           401 => Errors::Unauthorized,
@@ -32,14 +32,12 @@ module WikiArticle
         end
       end
 
-
       def initialize; end
 
       # to get contents of the article
       def contents(title)
         wiki_req_url = WikiApi.path(URI.encode(title))
-        article_info = call_wk_url(wiki_req_url).parse
-        Article.new(article_info, self)
+        call_wk_url(wiki_req_url).parse
       end
 
       def self.path(title_encoded)
