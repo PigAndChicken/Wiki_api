@@ -15,10 +15,8 @@ SimpleCov.start
 
 require_relative 'test_load_all'
 
-require_relative '../lib/wiki_api.rb'
-
 TITLE = "Service-oriented architecture"
-CORRECT = YAML.safe_load(File.read('spec/fixtures/wk_results.yml'))
+# CORRECT = YAML.safe_load(File.read('spec/fixtures/wk_results.yml'))
 CASSETTES_FOLDER = 'spec/fixtures/cassettes'.freeze
 
 VCR.configure do |c|
