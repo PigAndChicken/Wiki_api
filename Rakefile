@@ -10,6 +10,10 @@ Rake::TestTask.new(:spec) do |t|
   t.warning = false
 end
 
+task :console do
+  sh 'pry -r ./spec/test_load_all'
+end
+
 desc 'delete cassette fixtures'
 task :rmvcr do
   sh 'rm spec/fixtures/cassettes/*.yml' do |ok, _|
@@ -18,6 +22,8 @@ task :rmvcr do
 end
 
 namespace :quality do
+  CODE = 'lib/'
+  
   desc 'run all quality checks'
   task all: [:rubocop, :reek, :flog]
   
@@ -26,10 +32,10 @@ namespace :quality do
   end
 
   task :reek do
-    sh "reek lib/"
+    sh "reek #{CODE}"
   end
 
   task :flog do
-    sh "flog lib/"
+    sh "flog #{CODE}"
   end
 end
