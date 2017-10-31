@@ -5,8 +5,16 @@ task :default do
 end
 
 desc 'run tests'
-task :spec do
-  sh 'ruby spec/wiki_spec_vcr.rb'
+Rake::TestTask.new(:spec) do |t|
+  t.pattern = 'spec/*_spec.rb'
+  t.warning = false
+end
+
+desc 'delete cassette fixtures'
+task :rmvcr do
+  sh 'rm spec/fixtures/cassettes/*.yml' do |ok, _|
+    puts(ok ? 'Cassettes deleted' : 'No cassettes found')
+  end
 end
 
 namespace :quality do
