@@ -1,3 +1,5 @@
+# web application framework
+
 require 'roda'
 require 'econfig'
 require_relative 'lib/init.rb'
@@ -13,7 +15,8 @@ module WikiArticle
     extend Econfig::Shortcut
     Econfig.env = environment.to_s
     Econfig.root = '.'
-
+    
+    # below will be called each time a request is made 
     route do |routing|
       app = Api
 
@@ -21,11 +24,11 @@ module WikiArticle
       routing.root do
         { 'message' => "WikiArticle API up in #{app.environment}" }
       end
-
+      
       routing.on 'api' do
         # /api/vo.1 branch
         routing.on 'v0.1' do
-          # /api/v0.1/article/:title branch
+          # /api/v0.1/article/:title branch # (matching variables in URL path)
           routing.on 'article', String do |title|
             wiki_api = Wikipedia::Api.new
             article_mapper = Wikipedia::ArticleMapper.new(wiki_api)
@@ -38,7 +41,7 @@ module WikiArticle
             # GET /api/v0.1/article/:title request
             routing.is do
               { article: { title: article.title,
-                           content: article.contents } }
+                           contents: article.contents } }
             end
           end
         end

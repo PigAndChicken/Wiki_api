@@ -35,7 +35,7 @@ module WikiArticle
       def initialize; end
 
       # to get the data of the article
-      def article_data(title)
+      def article_info(title)
         wiki_req_url = Api.path(URI.encode(title))
         call_wk_url(wiki_req_url).parse
       end
