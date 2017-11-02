@@ -15,7 +15,7 @@ SimpleCov.start
 
 require_relative 'test_load_all'
 
-TITLE = "Service-oriented architecture"
+TITLE = "Taiwan"
 # CORRECT = YAML.safe_load(File.read('spec/fixtures/wk_results.yml'))
 CASSETTES_FOLDER = 'spec/fixtures/cassettes'.freeze
 
