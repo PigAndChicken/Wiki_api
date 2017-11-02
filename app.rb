@@ -8,26 +8,26 @@ module WikiArticle
     plugin :environments
     plugin :json
     plugin :halt
-    
+
     # to easily check ENV['RACK_ENV']
     extend Econfig::Shortcut
     Econfig.env = environment.to_s
     Econfig.root = '.'
-    
+
     route do |routing|
-      app = Wikiapi
+      app = Api
 
       # GET / request
       routing.root do
         { 'message' => "WikiArticle API up in #{app.environment}" }
       end
-      
+
       routing.on 'api' do
         # /api/vo.1 branch
         routing.on 'v0.1' do
-          # /api/v0.1/:title branch
+          # /api/v0.1/article/:title branch
           routing.on 'article', String do |title|
-            wiki_api = Wikipedia::Wikiapi.new
+            wiki_api = Wikipedia::Api.new
             article_mapper = Wikipedia::ArticleMapper.new(wiki_api)
             begin
               article = article_mapper.load(title)
@@ -35,7 +35,7 @@ module WikiArticle
               routing.halt(404, error: 'Article not found')
             end
 
-            # GET /api/v0.1/:title request
+            # GET /api/v0.1/article/:title request
             routing.is do
               { article: { title: article.title,
                            content: article.contents } }

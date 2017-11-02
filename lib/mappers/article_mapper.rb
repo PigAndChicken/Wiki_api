@@ -1,6 +1,6 @@
 module WikiArticle
   module Wikipedia
-    # Data mapper's entity object for Wikipedia's article
+    # data mapper object for Wikipedia's articles
     class ArticleMapper
       # initialize with gateway object
       def initialize(gateway)

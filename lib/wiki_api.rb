@@ -4,7 +4,7 @@ require 'addressable'
 module WikiArticle
   module Wikipedia
     # Gateway class to talk to Wikipedia API
-    class WikiApi
+    class Api
       module Errors
         # request unauthorized
         Unauthorized = Class.new(StandardError)
@@ -24,7 +24,7 @@ module WikiArticle
         end
 
         def successful?
-          HTTP_ERROR.include?(@response.code) ? false : true
+          HTTP_ERROR.keys.include?(@response.code) ? false : true
         end
 
         def response_or_error
@@ -34,9 +34,9 @@ module WikiArticle
 
       def initialize; end
 
-      # to get contents of the article
-      def contents(title)
-        wiki_req_url = WikiApi.path(URI.encode(title))
+      # to get the data of the article
+      def article_data(title)
+        wiki_req_url = Api.path(URI.encode(title))
         call_wk_url(wiki_req_url).parse
       end
 
